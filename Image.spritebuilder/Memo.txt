@@ -1,0 +1,49 @@
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+cocos2d for iPhoneレッスンノート
+P47 スプライトを動かす
+#import "MainScene.h"
+
+@implementation MainScene
+{
+CCSprite *image;
+}
+
+// size: 1136x640
+// viewDidLoadと同じ立ち上げ時に起動動作
+-(void) didLoadFromCCB
+{
+
+NSLog(@"動作開始");
+
+// 画面サイズの取得
+CGSize winSize = [CCDirector sharedDirector].viewSize;
+// 画像の生成
+image = [[CCSprite alloc]initWithImageNamed:@"image.png"];
+// 画像のポジション　中央表示
+image.position = ccp(winSize.width / 4.0, winSize.height / 2.0);
+// 画像を追加表示
+[self addChild:image];
+
+//NSLog() でクラス名、メソッド名を表示
+CCLOG(@"LOG: %@: %@", NSStringFromSelector(_cmd), self);
+
+// スプライトを動かす
+[self schedule:@selector(nextFrame:) interval:0.5];
+
+}
+
+
+// 画像の移動
+-(void) nextFrame:(CCTime)dt
+{
+// 現在実行しているメソッド名を出力
+NSLog(@"%s", __func__);
+// 引数dtの値を出力
+NSLog(@"dt = %f", dt);
+// 画像の移動 dt秒の50ピクセルの移動
+image.position = ccp(image.position.x + 50 * dt, image.position.y);
+}
+
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
